@@ -5,12 +5,11 @@ import (
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from Go on Docker with Alpine!")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Starting server on :8080...")
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Hello, Dockerized Go App!")
+	})
+
+	fmt.Println("Server starting on :8080...")
 	http.ListenAndServe(":8080", nil)
 }
