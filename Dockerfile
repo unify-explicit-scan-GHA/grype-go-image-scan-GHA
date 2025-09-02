@@ -1,23 +1,25 @@
-# Start from the official lightweight Go image
 FROM golang:1.20-alpine
 
-# Install git (needed for go get in some projects)
+# Install git (required for go modules that use GitHub or others)
 RUN apk add --no-cache git
 
-# Set the Current Working Directory inside the container
+# Create working directory
 WORKDIR /app
 
-# Copy go mod and sum files (optional if using modules)
-# COPY go.mod go.sum ./
+# Copy go.mod and go.sum first (for layer caching)
+COPY go.mod go.sum ./
 
-# Copy the source code into the container
+# Download dependencies
+RUN go mod download
+
+# Copy the rest of the application
 COPY . .
 
 # Build the Go app
 RUN go build -o main .
 
-# Expose port 8080 to the outside world
+# Expose port (change if needed)
 EXPOSE 8080
 
-# Run the executable
+# Run the binary
 CMD ["./main"]
