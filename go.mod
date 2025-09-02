@@ -1,1 +1,3 @@
-go mod init go-app
+module go-app
+
+go 1.20
