@@ -1,1 +1,1 @@
-# trivy-go-dockerImage-scan
+# trivy-golang-dockerImage-scan
