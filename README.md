@@ -1,1 +1,1 @@
-# trivy-golang-dockerImage-scan
+# grype-golang-dockerImage-scan
